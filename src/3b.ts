@@ -1,6 +1,6 @@
 import { Reading } from "./types";
 
-const getMockReadings = async (): Promise<Reading[]> => {
+export const getMockReadings = async (): Promise<Reading[]> => {
     return [
         {
             sensorId: 1,
@@ -23,7 +23,7 @@ const getMockReadings = async (): Promise<Reading[]> => {
     ];
 };
 
-async function checkUpperThresholds() {
+export async function checkUpperThresholds() {
     let allSensorReadings = await getMockReadings();
 
     for (let reading of allSensorReadings) {

@@ -1,6 +1,6 @@
 import {Reading} from "./types";
 
-const filterBySensorId = (sensorId: number, readingsPromise: Promise<Reading[]>): Promise<Reading[]> => {
+export const filterBySensorId = (sensorId: number, readingsPromise: Promise<Reading[]>): Promise<Reading[]> => {
     return readingsPromise
         .then(readings => {
             return readings.filter(reading => reading.sensorId === sensorId);
@@ -15,8 +15,6 @@ const filterBySensorId = (sensorId: number, readingsPromise: Promise<Reading[]>)
 let sensorId = 2;
 
 let readingsPromise: Promise<Reading[]> = new Promise((resolve) => {
-    // For demonstration, resolving with an example list.
-    // You might fetch this data from an API in a real-world scenario.
     resolve([
         {
             sensorId: 1,
@@ -37,8 +35,6 @@ let readingsPromise: Promise<Reading[]> = new Promise((resolve) => {
             sensorValue: 5
         }
     ]);
-    // For testing rejection:
-    // reject("Failed to fetch readings");
 });
 
 filterBySensorId(sensorId, readingsPromise)

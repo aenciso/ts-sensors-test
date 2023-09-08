@@ -1,10 +1,9 @@
 import {Reading} from "./types";
 
-const filterBySensorId = (sensorId: number, readings: Reading[]): Reading[] => {
+export const filterBySensorId = (sensorId: number, readings: Reading[]): Reading[] => {
     return readings.filter(reading => reading.sensorId === sensorId);
 };
 
-// Example usage:
 let sensorId = 2;
 let readings: Reading[] = [
     {

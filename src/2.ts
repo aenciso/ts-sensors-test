@@ -1,6 +1,6 @@
 import {Reading} from "./types";
 
-function getLatestReadings(readings: Reading[]): { [key: number]: Reading } {
+export function getLatestReadings(readings: Reading[]): { [key: number]: Reading } {
     let latestReadings: { [key: number]: Reading } = {};
 
     readings.forEach(reading => {
