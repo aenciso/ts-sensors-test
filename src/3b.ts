@@ -1,7 +1,6 @@
-import {Reading} from "./types";
+import { Reading } from "./types";
 
 const getMockReadings = async (): Promise<Reading[]> => {
-    await new Promise(res => setTimeout(res, 500));
     return [
         {
             sensorId: 1,
@@ -20,31 +19,39 @@ const getMockReadings = async (): Promise<Reading[]> => {
             sensorType: 'temperature',
             sensorValue: 21,
             timestamp: '2023-08-23T12:52:48.775Z'
-        }]
+        }
+    ];
 };
+
 async function checkUpperThresholds() {
     let allSensorReadings = await getMockReadings();
 
-    for (let i = 0; i < allSensorReadings.length; i++) {
-        const reading = allSensorReadings[i];
-        if (reading.sensorType == 'air' && reading.sensorValue > 12) {
-            console.error("Air value has exceeded threshold");
-        }
-        if (reading.sensorType == 'humidity' && reading.sensorValue > 1) {
-            console.error("Humidity value has exceeded threshold");
-        }
-        if (reading.sensorType == 'temperature' && reading.sensorValue > 25) {
-            console.error("Temperature value has exceeded threshold");
+    for (let reading of allSensorReadings) {
+        switch (reading.sensorType) {
+            case 'air':
+                if (reading.sensorValue > 12) {
+                    console.error("Air value has exceeded threshold");
+                }
+                break;
+            case 'humidity':
+                if (reading.sensorValue > 1) {
+                    console.error("Humidity value has exceeded threshold");
+                }
+                break;
+            case 'temperature':
+                if (reading.sensorValue > 25) {
+                    console.error("Temperature value has exceeded threshold");
+                }
+                break;
         }
     }
 }
 
 (async () => {
     try {
-        const result = await checkUpperThresholds();
-        console.log(result);
+        await checkUpperThresholds();
+        console.log("Threshold check complete.");
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 })();
-
