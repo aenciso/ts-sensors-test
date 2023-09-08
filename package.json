@@ -7,7 +7,6 @@
     "1a": "ts-node src/1a.ts",
     "1b": "ts-node src/1b.ts",
     "2": "ts-node src/2.ts",
-    "3a": "ts-node src/3a.ts",
     "3b": "ts-node src/3b.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

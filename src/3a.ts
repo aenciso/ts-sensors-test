@@ -1,3 +1,9 @@
+/**
+ * The function getMockReadings3a is asynchronous and returns a promise
+ * and checkUpperThresholds3a is trying to get the result without waiting for
+ * the promise to resolve
+ */
+
 const getMockReadings3a = async (): Promise<any> => {
     await new Promise(res => setTimeout(res, 500));
     return [
@@ -20,6 +26,10 @@ const getMockReadings3a = async (): Promise<any> => {
             timestamp: '2023-08-23T12:52:48.775Z'
         }]
 }
+
+/**
+ * allSensorReadings is not initialised so when the function runs, it returns undefined
+ */
 function checkUpperThresholds3a() {
     let allSensorReadings: any;
     getMockReadings3a().then(
@@ -27,6 +37,10 @@ function checkUpperThresholds3a() {
             allSensorReadings = readings
         }
     )
+    // The for loop is outside of the .then() callback.
+    // This means that the loop will execute immediately after getMockReadings() is called, but before the promise has had a chance
+    // to resolve and assign the readings to allSensorReadings.
+    // when the loop attempts to access allSensorReadings.length, it will throw an error because allSensorReadings is still undefined.
     for (let i = 0; i < allSensorReadings.length; i++) {
         const reading = allSensorReadings[i];
         if (reading.sensorType == 'air' && reading.sensorValue > 12) {  console.error("Air value has exceeded threshold");  }
